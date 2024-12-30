@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block start %}
+
+<div class="container-fluid">
+    {% for i in nav %}
+    <div class="containerfluid">
+        <img src="{{i.image.url}}" class="img-fluid" alt="...">
+    </div>
+    {% endfor %}
+</div>
+
+
+{% endblock %}

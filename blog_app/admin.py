@@ -11,4 +11,8 @@ class CustomUserAdmin(UserAdmin):
                 }),
     )
 
-admin.site.register(CustomUser,CustomUserAdmin) 
+class NavAdmin(admin.ModelAdmin):
+    list_display = ["image","title","caption"]
+
+admin.site.register(CustomUser,CustomUserAdmin)
+admin.site.register(Nav,NavAdmin) 

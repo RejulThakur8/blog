@@ -1,0 +1,14 @@
+.gradient-customs {
+    background-color: #DFF6FF;
+}
+input#typeX{
+    border-color: #80ffb3;
+}
+
+button.button{
+    background-color: #0066FF;
+}
+
+button.button:hover{
+    color: #004C99;
+}

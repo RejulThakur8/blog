@@ -1,0 +1,24 @@
+.gradient-custom {
+    background-color: #1C1C1C;
+    /* background: #6a11cb;
+    
+    background: -webkit-linear-gradient(to right, rgb(135, 75, 199), rgb(113, 154, 223));
+    
+    background: linear-gradient(to right, rgb(144, 75, 219), rgb(69, 130, 235)) */
+    }
+
+input#typeY{
+    border-color: #4A90E2;
+}
+
+a.forgot{
+    color: #80D8FF;
+}
+
+button.button1{
+    background-color: #FF5722;
+}
+
+button.button1{
+    color: #E64A19;
+}

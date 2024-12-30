@@ -1,0 +1,38 @@
+footer {
+    /* background-color: #F0FFF0; */
+    color: #333333; 
+    padding: 20px 10px;
+    text-align: center;
+    border-top: black;
+  }
+  
+  footer a {
+    color: #6C63FF; /* Purple for links */
+    text-decoration: none;
+  }
+  
+  footer a:hover {
+    text-decoration: underline;
+  }
+  
+  .footer-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  
+  .footer-about,
+  .footer-links,
+  .footer-social {
+    margin: 10px 0;
+  }
+  
+  .footer-links ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-links li {
+    margin: 5px 0;
+  }
+  

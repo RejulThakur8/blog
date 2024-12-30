@@ -1,0 +1,31 @@
+body{
+    background-color: #F0FFF0;
+    
+}
+.navbar-custom{
+    padding: 10px 20px;
+}
+
+.navbar-nav-center{
+    margin: 0 auto;
+}
+
+.form-inline {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-spacing {
+margin-left: 10px;
+}
+
+.navbar .nav-link{
+    cursor: pointer;
+    color: black;
+}
+.navbar .nav-link:hover{
+    text-decoration: underline;
+    text-decoration-color: rgb(255, 21, 0);
+    text-underline-offset: 10px;
+    color: rgb(255, 51, 0);
+}
