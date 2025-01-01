@@ -1,10 +1,24 @@
 {% extends "base.html" %}
 
+{% block title %} Home {% endblock title %}
+
 {% load static %}
 
 {% block start %}
 
 <div class="container-fluid">
+    <div class="messages justify-content-center">
+        {% if messages %}
+
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
+
+        {% endif %}
+    </div>
+
     {% for i in nav %}
     <div class="containerfluid">
         <img src="{{i.image.url}}" class="img-fluid" alt="...">

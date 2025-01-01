@@ -14,6 +14,14 @@ class CustomUser(AbstractUser):
     user_country = models.CharField(max_length=50)
     user_zipcode = models.CharField(max_length=50)
 
+class Authenticate(models.Model):
+    username = models.CharField(max_length=100)
+    email = models.EmailField()
+    password = models.CharField(max_length=50)
+    phone_number = models.CharField(max_length=20,default=5234)
+
+    def __str__(self):
+        return self.username
 
 class Nav(models.Model):
     image = models.ImageField(upload_to="static/images", height_field=None, width_field=None, max_length=None)

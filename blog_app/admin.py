@@ -14,5 +14,9 @@ class CustomUserAdmin(UserAdmin):
 class NavAdmin(admin.ModelAdmin):
     list_display = ["image","title","caption"]
 
+class AuthenticateAdmin(admin.ModelAdmin):
+    list_display = ["username","email","password","phone_number"]
+
 admin.site.register(CustomUser,CustomUserAdmin)
 admin.site.register(Nav,NavAdmin) 
+admin.site.register(Authenticate,AuthenticateAdmin) 

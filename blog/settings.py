@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Custom User Model
+
 AUTH_USER_MODEL = 'blog_app.CustomUser'
 
 
@@ -50,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'blog.urls'
@@ -68,6 +71,14 @@ TEMPLATES = [
             ],
         },
     },
+]
+
+# Backend
+# Customize Authentication in Backend
+
+AUTHENTICATION_BACKENDS = [
+    'blog_app.auth_backends.PhoneNumberBackend',
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
 WSGI_APPLICATION = 'blog.wsgi.application'

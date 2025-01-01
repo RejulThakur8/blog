@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% block title %} Signup Page {% endblock title %}
+
 {% load static %}
 
 {% block start %}
@@ -11,39 +13,32 @@
                 <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                     <div class="card bg-info-subtle text-white" style="border-radius: 1rem;">
                         <div class="card-body p-5 text-center">
-            
-                            <div class="mb-md-5 mt-md-4 pb-4">
-                
-                                <h2 class="fw-bold mb-2 text-uppercase text-black">Sign up</h2>
-                                <p class="text-black mb-5">Create Your Account!</p>
+                            <form method="post" action="/signup/">
+                                {% csrf_token %}
+                                <div class="mb-md-5 mt-md-4 pb-4">
+                                    <h2 class="fw-bold mb-2 text-uppercase text-black">Sign up</h2>
+                                    <p class="text-black mb-5">Create Your Account!</p>
 
-                                <div data-mdb-input-init class="form-outline form-white mb-4">
-                                    <input type="text" id="typeX" class="form-control form-control-lg" placeholder="Username"/>
-                                </div>
+                                    <div data-mdb-input-init class="form-outline form-white mb-4">
+                                        <input type="text" id="typeX" class="form-control form-control-lg" name="username" placeholder="Username"/>
+                                    </div>
 
-                                <div data-mdb-input-init class="form-outline form-white mb-4">
-                                    <input type="tel" id="typeX" class="form-control form-control-lg" placeholder="Phone No"/>
+                                    <div data-mdb-input-init class="form-outline form-white mb-4">
+                                        <input type="tel" id="typeX" class="form-control form-control-lg" name="phone" placeholder="Phone No"/>
+                                    </div>
+                    
+                                    <div data-mdb-input-init class="form-outline form-white mb-4">
+                                        <input type="email" id="typeX" class="form-control form-control-lg" name="email" placeholder="Email"/>
+                                    </div>
+                    
+                                    <div data-mdb-input-init class="form-outline form-white mb-4">
+                                        <input type="password" id="typeX" class="form-control form-control-lg" name="password" placeholder="Password"/>
+                                    </div>
+                    
+                    
+                                    <button data-mdb-button-init data-mdb-ripple-init class="btn button btn-lg px-5 mt-2" type="submit">Signin</button>
                                 </div>
-                
-                                <div data-mdb-input-init class="form-outline form-white mb-4">
-                                    <input type="email" id="typeX" class="form-control form-control-lg" placeholder="Email"/>
-                                </div>
-                
-                                <div data-mdb-input-init class="form-outline form-white mb-4">
-                                <input type="password" id="typeX" class="form-control form-control-lg" placeholder="Password"/>
-                                </div>
-                
-                
-                                <button data-mdb-button-init data-mdb-ripple-init class="btn button btn-lg px-5 mt-2" type="submit">Signin</button>
-                
-                                <div class="d-flex justify-content-center text-center mt-4 pt-1">
-                                <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
-                                <a href="#!" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
-                                <a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
-                                </div>
-                
-                            </div>
-            
+                            </form>
                         <div>
                             <p class="mb-0 text-dark">Do you have an account ?<a href="/signin" class="text-primary-emphasis fw-bold">log in</a></p>
                         </div>
