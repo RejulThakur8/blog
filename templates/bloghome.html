@@ -1,12 +1,78 @@
 {% extends "base.html" %}
 
-
-
 {% load static %}
 
 {% block start %}
 
-<h1>This is bloghome page</h1>
+
+<div class="container">
+    <section class="row">
+        <div class="col-lg-7 col-md-12">
+            <h1><a class="text-decoration-none" href="">{{blog.Category}}</a> > {{blog.SubCategory}} > {{blog.title}}
+            </h1>
+            <h6> {{blog.datetime}}</h6>
+            <h6> <span class="text-secondary"> Story by -</span> <a href="">{{blog.author}}</a> </h>
+                <h3 class="mb-0">{{blog.heading}}</h3>
+                <div class="mt-2">
+                    <img src="{{blog.image.url}}" class="img-fluid w-100" alt="...">
+                </div>
+                <p class="mt-2">{{blog.content}}</p>
+                <div class="mt-4">
+                    <img src="{{blog.image1.url}}" class="rounded img-fluid w-100" alt="...">
+                </div>
+                <p class="mt-2">{{blog.content1}}</p>
+        </div>
 
 
+        <!-- Vertical line -->
+        <div class="col-lg-1 d-none d-lg-block">
+            <div class="vr" Style="height: 100%;"></div>
+        </div>
+
+
+        <!-- Comment section -->
+        <div class="col-lg-4 col-md-12">
+            <div class="container border border-secondary rounded p-2">
+                <h3 class="text-dark">Leave a comment : </h3>
+                <form class="row gap-3" method="post" action="/comment/">
+                    {% csrf_token %}
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <textarea class="form-control h-100" name="comment" placeholder="Leave a comment here"
+                                id="floatingTextarea"></textarea>
+                                <input type="hidden" name="blogid" value="{{blog.id}}">
+                            <label for="floatingTextarea">Your Comments</label>
+                        </div>
+                    </div>
+                    <div class="col-12 d-flex justify-content-end">
+                        <input class="btn btn-primary px-4 py-2" type="submit" value="Add Comment">
+                    </div>
+                </form>
+            </div>
+
+            <!-- Comments -->
+            <div class="container mt-5 m-0 p-0">
+                <h1 class="text-secondary">Comments :</h1>
+                <div class="col-12">
+                    {% for comment in comments %}
+                        <div class="shadow-lg p-3 mb-5 border border-secondary rounded">
+                            <h5 name="user">{{comment.user.username}} . <span class="fs-6 text-secondary" name="time">{{comment.time}}</span></h5>
+                            <hr>
+                            <p name="comment">{{comment.comment}}</p>
+                            <div class="col-12 d-flex justify-content-start gap-2">
+                                <button name="" id="" class="btn btn-link text-decoration-none" type="button" role="button">Reply</button>
+                                <button class="btn btn-secondary" type="submit">Edit</button>
+                                <button class="btn btn-danger" type="submit">Delete</button>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+
+
+    </section>
+</div>
+
+<script src="{% static 'js/bloghome.js' %}"></script>
 {% endblock %}

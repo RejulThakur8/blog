@@ -4,6 +4,9 @@ body{
 }
 .navbar-custom{
     padding: 10px 20px;
+    background: rgba(255, 255, 255, 0);
+    backdrop-filter: blur(20px);
+    
 }
 
 .navbar-nav-center{

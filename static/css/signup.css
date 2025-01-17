@@ -7,8 +7,10 @@ input#typeX{
 
 button.button{
     background-color: #0066FF;
+    color: white;
 }
 
 button.button:hover{
     color: #004C99;
+    border: solid #004C99 1px;
 }

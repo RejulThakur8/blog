@@ -2,17 +2,20 @@
 
 {% block title %} Home {% endblock title %}
 
+{% block homeactive %} active {% endblock homeactive %}
+
 {% load static %}
 
 {% block start %}
 
-<div class="container-fluid">
-    <div class="messages justify-content-center">
+<div class="container">
+    <div class="messages d-flex justify-content-center text-center">
         {% if messages %}
 
         {% for message in messages %}
-        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        <div class="alert alert-{{ message.tags }} w-50 alert-dismissible fade show" role="alert">
             {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         {% endfor %}
 
@@ -20,10 +23,39 @@
     </div>
 
     {% for i in nav %}
-    <div class="containerfluid">
-        <img src="{{i.image.url}}" class="img-fluid" alt="...">
+    <div class="container position-relative mb-4">
+        <img src="{{i.image.url}}" class="img-fluid w-100" alt="...">
+        <div class="overlay-text position-absolute top-50 start-50 translate-middle text-center text-white">
+            <h1 class="text-light fw-bold">{{i.title}}</h1>
+            <p class="text-light">{{i.caption}}</p>
+            <p class="text-light">{{i.para1}}</p>
+            <p class="text-light">{{i.para2}}</p>
+            <p class="text-light">{{i.para3}}</p>
+            <button type="btn" class="btn btn-primary mt-3">Learn More</button>
+        </div>
     </div>
     {% endfor %}
+
+    <div class="row mb-2">
+        {% for i in blog %}
+        <div class="col-md-6">
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-3 d-flex flex-column position-static">
+                    <strong class="d-inline-block mb-2 text-primary-emphasis">{{i.title}}</strong>
+                    <h3 class="mb-0">{{i.heading}}</h3>
+                    <p class="mb-1 text-body-secondary fs-6">{{i.datetime}}</p>
+                    <p class="card-text mb-auto">{{i.content | truncatechars:150}}</p>
+                    <a href="/bloghome/{{i.new_slug}}" class="icon-link gap-1 icon-link-hover stretched-link">
+                    Continue reading
+                    </a>
+                </div>
+                <div class="col-auto d-none d-lg-block">
+                    <img src="{{i.image.url}}" class="img-thumbnail" alt="">
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 </div>
 
 

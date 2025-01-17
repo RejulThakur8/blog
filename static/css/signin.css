@@ -17,8 +17,10 @@ a.forgot{
 
 button.button1{
     background-color: #FF5722;
+    color: white;
 }
 
-button.button1{
+button.button1:hover{
     color: #E64A19;
+    border: solid #E64A19 1px;
 }
