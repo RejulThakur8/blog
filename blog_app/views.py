@@ -8,6 +8,7 @@ from django.contrib import messages
 from .models import *
 from django.db.models import Q
 import os
+from .forms import BlogForm
 # Create your views here.
 
 # Home Section
@@ -28,7 +29,17 @@ def category(request):
 
 # Create our blog section
 def createblog(request):
-    return render(request,'create_blog.html')
+    if request.method=="POST":
+        form = BlogForm(request.POST,request.FILES)
+        print(form)
+        if form.is_valid():
+            form.save()
+            messages.success(request,"Blog Created Succesfully!")
+            return redirect("/create_blog/")
+    else:
+        form = BlogForm()
+        print(form.errors)
+    return render(request,'create_blog.html',{"form":form})
 
 
 # User's personalized dashboard

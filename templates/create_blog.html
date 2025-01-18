@@ -9,15 +9,19 @@
 
 <div class="container mt-5">
     <div class="row">
-        <div class="col-md-8 offset-med-2">
-            <div class="card">
+        <div class="p-3 bg-secondary col-md-8 offset-md-2">
+            <div class="card_blog card">
                 <div class="card-header">
-                    <h3> Create Blog </h3>
+                    <h3 class="text-center header"> Create Blog </h3>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="/create-blog">
+                    <form method="POST" action="/create_blog/" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="form-group">
+                            {{ form.as_p }}
+                        </div>
+                        <div class="form-control border-0 text-center">
+                            <button type="submit" class="btn btn-primary">Create Blog</button>
                         </div>
                     </form>
                 </div>
