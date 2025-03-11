@@ -54,15 +54,15 @@
             <div class="container mt-5 m-0 p-0">
                 <h1 class="text-secondary">Comments :</h1>
                 <div class="col-12">
-                    {% for comment in comments %}
+                    {% for i in comments %}
                         <div class="shadow-lg p-3 mb-5 border border-secondary rounded">
-                            <h5 name="user">{{comment.user.username}} . <span class="fs-6 text-secondary" name="time">{{comment.time}}</span></h5>
+                            <h5 name="user">{{i.user.username}} . <span class="fs-6 text-secondary" name="time">{{i.time}}</span></h5>
                             <hr>
-                            <p name="comment">{{comment.comment}}</p>
+                            <p name="comment">{{i.comment}}</p>
                             <div class="col-12 d-flex justify-content-start gap-2">
                                 <button name="" id="" class="btn btn-link text-decoration-none" type="button" role="button">Reply</button>
                                 <button class="btn btn-secondary" type="submit">Edit</button>
-                                <button class="btn btn-danger" type="submit">Delete</button>
+                                <a href="/delete/{{i.id}}" class="btn btn-danger" type="submit">Delete</a>
                         </div>
                     {% endfor %}
                 </div>

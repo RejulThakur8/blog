@@ -24,6 +24,7 @@ def explore(request):
 
 # Explore Content Using category section
 def category(request):
+    
     return render(request,'Category.html')
 
 
@@ -40,6 +41,13 @@ def createblog(request):
         form = BlogForm()
         print(form.errors)
     return render(request,'create_blog.html',{"form":form})
+
+@login_required
+def delete(request,id):
+    blog = get_object_or_404(Blog,id=id)
+    blog.delete()
+    messages.success(request,"Blog Deleted Successfully!")
+    return render(request,'index.html')
 
 
 # User's personalized dashboard

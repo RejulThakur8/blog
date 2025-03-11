@@ -7,6 +7,7 @@ urlpatterns = [
     path('explore/',views.explore,name="explore"),
     path('category/',views.category,name="category"),
     path('create_blog/',views.createblog,name="createblog"),
+    path('delete/<int:id>/',views.delete,name="delete"),
     path('dashboard/',views.dashboard,name="dashboard"),
     path('signup/',views.signup,name="signup"),
     path('signin/',views.signin,name="signin"),
