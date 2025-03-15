@@ -15,4 +15,3 @@ class BlogForm(forms.ModelForm):
             'Author':forms.TextInput(attrs={'class':'form-control','id':'author'}),
             'image':forms.FileInput(attrs={'class':'forms.control','type':'file','id':'image'})            
         }
-        

@@ -47,7 +47,7 @@ def delete(request,id):
     blog = get_object_or_404(Blog,id=id)
     blog.delete()
     messages.success(request,"Blog Deleted Successfully!")
-    return render(request,'index.html')
+    return redirect("/create_blog/")
 
 
 # User's personalized dashboard
@@ -139,10 +139,38 @@ def signout(request):
 
 # User Profile Section
 def profile(request):
-    return render(request,"profile.html")
+    users = CustomUser.objects.all()
+    if request.method=="POST":
+        username = request.POST.get("username")
+        phone = request.POST.get("phone_number")
+        alter_phone = request.POST.get("alter_phone_number")
+        email = request.POST.get("email")
+        user_bio = request.POST.get("user_bio")
+        user_address = request.POST.get("user_address")
+        user_city = request.POST.get("user_city")
+        user_state = request.POST.get("user_state")
+        user_country = request.POST.get("user_country")
+        user_zipcode = request.POST.get("user_zipcode")
+        user_image = request.FILES.get("user_image")
+
+        user = CustomUser.objects.get(id=request.user.id)
+        user.username = username
+        user.phone_number = phone
+        user.alter_phone_number = alter_phone
+        user.email = email
+        user.user_bio = user_bio
+        user.user_address = user_address
+        user.user_city = user_city
+        user.user_state = user_state
+        user.user_country = user_country
+        user.user_zipcode = user_zipcode
+        user.user_image = user_image
+        user.save()
+        
+    return render(request,"profile.html",{'users':users})
 
 
 
-# User Profile Section
+# Bookmark Section
 def bookmark(request):
     return render(request,"bookmark.html")

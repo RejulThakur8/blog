@@ -6,58 +6,70 @@
 
 {% block start %}
 
-{% if request.user.is_authenticated %}
-<div class="container bg-white p-5">
-    <form class="row g-3">
-        <div class="col-md-6">
-          <label for="inputEmail4" class="form-label">Email</label>
-          <input type="email" class="form-control" id="inputEmail4" value="{{request.user.email}}">
-        </div>
-        <div class="col-md-6">
-          <label for="inputPassword4" class="form-label">Password</label>
-          <input type="password" class="form-control" id="inputPassword4" value="{{request.user.password}}">
-        </div>
-        <div class="col-md-4">
-          <label for="inputUsername" class="form-label">Username</label>
-          <input type="text" class="form-control" id="inputUsername" value="{{request.user.username}}">
-        </div>
-        <div class="col-md-6">
-          <label for="inputBio" class="form-label">Bio</label>
-          <input type="text" class="form-control" id="inputBio" value="{{request.user.user_bio}}">
-        </div>
-        <div class="col-md-6">
-          <label for="inputImage" class="form-label">Image</label>
-          <input type="text" class="form-control" id="inputImage" value="{{request.user.user_image}}">
-        </div>
+<div class="container">
+  <div class="row">
+    <div class="display-4">
+      <h1 class="text-center">Profile</h1>
+    </div>
+  </div>
+  {% if request.user.is_authenticated %}
+  <div class="container bg-secondary profile-Update">
+      <form class="row g-3" method="POST" action="{% url 'profile' %}" enctype="multipart/form-data">
+        {% csrf_token %}
         <div class="col-12">
-          <label for="inputAddress" class="form-label">Address</label>
-          <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" value="{{request.user.user_address}}">
+          <img src="{{request.user.user_image.url}}" class="img-fluid image" alt="Unable to load image">
+          <input type="file" class="form-control" id="inputImage" value="{{request.user.user_image}}" name="user_image">
         </div>
-        <div class="col-12">
-          <label for="Phone" class="form-label">Phone Number</label>
-          <input type="text" class="form-control" id="Phone" value="{{request.user.phone_number}}">
-        </div>
-        <div class="col-md-6">
-          <label for="inputCity" class="form-label">City</label>
-          <input type="text" class="form-control" id="inputCity" value="{{request.user.user_city}}">
-        </div>
-        <div class="col-md-4">
-          <label for="inputState" class="form-label">State</label>
-          <input type="text" class="form-control" id="inputState" value="{{request.user.user_state}}">
-        </div>
-        <div class="col-md-4">
-          <label for="inputCountry" class="form-label">Country</label>
-          <input type="text" class="form-control" id="inputCountry" value="{{request.user.user_country}}">
-        </div>
-        <div class="col-md-2">
-          <label for="inputZip" class="form-label">Zip</label>
-          <input type="text" class="form-control" id="inputZip" value="{{request.user.user_zipcode}}">
-        </div>
-        <div class="col-12 text-center m-5">
-          <button type="submit" class="btn btn-primary">Update</button>
-        </div>
-    </form>
+          <div class="col-md-4">
+            <label for="inputEmail4" class="form-label">Email</label>
+            <input type="email" class="form-control" id="inputEmail4" value="{{request.user.email}}" name="email">
+          </div>
+          <div class="col-md-4">
+            <label for="inputPassword4" class="form-label">Password</label>
+            <input type="password" class="form-control" id="inputPassword4" value="{{request.user.password}}" disabled  name="password">
+          </div>
+          <div class="col-md-4">
+            <label for="inputUsername" class="form-label">Username</label>
+            <input type="text" class="form-control" id="inputUsername" value="{{request.user.username}}"  name="username">
+          </div>
+          <div class="col-md-4">
+            <label for="inputBio" class="form-label">Bio</label>
+            <input type="text" class="form-control" id="inputBio" value="{{request.user.user_bio}}" name="user_bio">
+          </div>
+          <div class="col-md-4">
+            <label for="inputAddress" class="form-label">Address</label>
+            <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" value="{{request.user.user_address}}" name="user_address">
+          </div>
+          <div class="col-md-4">
+            <label for="Phone" class="form-label">Phone Number</label>
+            <input type="text" class="form-control" id="Phone" value="{{request.user.phone_number}}" name="phone_number">
+          </div>
+          <div class="col-md-4">
+            <label for="PhoneAl" class="form-label">Alter Phone Number</label>
+            <input type="text" class="form-control" id="PhoneAl" value="{{request.user.alter_phone_number}}" name="alter_phone_number">
+          </div>
+          <div class="col-md-4">
+            <label for="inputCity" class="form-label">City</label>
+            <input type="text" class="form-control" id="inputCity" value="{{request.user.user_city}}" name="user_city">
+          </div>
+          <div class="col-md-4">
+            <label for="inputState" class="form-label">State</label>
+            <input type="text" class="form-control" id="inputState" value="{{request.user.user_state}}" name="user_state">
+          </div>
+          <div class="col-md-2">
+            <label for="inputCountry" class="form-label">Country</label>
+            <input type="text" class="form-control" id="inputCountry" value="{{request.user.user_country}}" name="user_country">
+          </div>
+          <div class="col-md-2">
+            <label for="inputZip" class="form-label">Zip</label>
+            <input type="text" class="form-control" id="inputZip" value="{{request.user.user_zipcode}}"  name="user_zipcode">
+          </div>
+          <div class="col-12 text-center mt-5">
+            <button type="submit" class="btn btn-primary">Update</button>
+          </div>
+      </form>
+  </div>
+  {% endif %}
 </div>
-{% endif %}
 
 {% endblock %}
