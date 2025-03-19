@@ -9,7 +9,17 @@
 {% block start %}
 
 <div class="container">
-    <h1>This is Category page</h1>
+    <nav class="navbar navbar-expand-lg bg-black rounded ">
+        <div class="container-fluid">
+            <ul class="navbar-nav">
+                {% for i in categories %}
+                <li class="nav-item">
+                    <a class="nav-link active text-white" aria-current="page" href="#">{{i.category_name}}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </nav>
 </div>
 
 

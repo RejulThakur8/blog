@@ -6,7 +6,13 @@ body{
     padding: 10px 20px;
     background: rgba(255, 255, 255, 0);
     backdrop-filter: blur(20px);
-    
+    margin: 30px 30px;
+}
+
+@media (max-width: 768px){
+    .navbar-custom{
+        margin: 10px 0px;
+    }
 }
 
 .navbar-nav-center{

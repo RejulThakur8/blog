@@ -24,8 +24,8 @@ def explore(request):
 
 # Explore Content Using category section
 def category(request):
-    
-    return render(request,'Category.html')
+    categories = Category.objects.all()
+    return render(request,'Category.html',{'categories':categories})
 
 
 # Create our blog section
