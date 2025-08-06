@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from autoslug import AutoSlugField
 from django.utils.timezone import now
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -85,3 +86,6 @@ class BlogComments(models.Model):
 
     def __str__(self):
         return  self.comment[0:10]
+    
+class dash(models.Model):
+    pass

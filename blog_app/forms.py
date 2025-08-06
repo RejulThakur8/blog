@@ -12,6 +12,6 @@ class BlogForm(forms.ModelForm):
             'Title': forms.TextInput(attrs= {'class':'form-control','id':'title'}),
             'content':forms.Textarea(attrs={'class':'form-control','id':'content'}),
             'content1':forms.Textarea(attrs={'class':'form-control','id':'content1'}),
-            'Author':forms.TextInput(attrs={'class':'form-control','id':'author'}),
+            '{{request.user.username}}':forms.TextInput(attrs={'class':'form-control','id':'author'}),
             'image':forms.FileInput(attrs={'class':'forms.control','type':'file','id':'image'})            
         }

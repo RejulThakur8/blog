@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponse, HttpResponseNotAllowed
 from .models import CustomUser
+from django.views.generic import ListView
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import hashers
@@ -12,10 +13,15 @@ from .forms import BlogForm
 # Create your views here.
 
 # Home Section
-def home(request):
-    nav = Nav.objects.all()
-    blog = Blog.objects.all()
-    return render(request,'index.html',{'nav':nav,"blog":blog})
+class HomeListView(ListView):
+    model = Blog
+    template_name = "index.html"
+    context_object_name = "blog"
+
+    def get_context_data(self,**kwargs):
+        context = super().get_context_data(**kwargs)
+        context["nav"] = Nav.objects.all()
+        return context
 
 # Explore content section
 def explore(request):
@@ -32,11 +38,11 @@ def category(request):
 def createblog(request):
     if request.method=="POST":
         form = BlogForm(request.POST,request.FILES)
-        print(form)
         if form.is_valid():
             form.save()
             messages.success(request,"Blog Created Succesfully!")
             return redirect("/create_blog/")
+        messages.success(request,"Blog Created Succesfully!")
     else:
         form = BlogForm()
         print(form.errors)
@@ -116,8 +122,7 @@ def signin(request):
         
         
         user = authenticate(phone_number = phone ,password = password)
-        print(user)
-
+        
         if user is None:
             messages.error(request,"Invalid Phone Number & Password!")
             return redirect("/signin/")
