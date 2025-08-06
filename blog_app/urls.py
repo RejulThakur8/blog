@@ -16,7 +16,6 @@ urlpatterns = [
     path('signin/',views.signin,name="signin"),
     path('logout/',views.signout,name="logout"),
     path('profile/',views.profile,name="profile"),
-    path('bookmark/',views.bookmark,name="bookmark"),
     path('bloghome/<slug>',views.bloghome,name="bloghome"),
     path('search/',views.search,name="search"),
 ]

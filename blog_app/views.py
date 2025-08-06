@@ -172,7 +172,3 @@ def profile(request):
     return render(request,"profile.html",{'users':users})
 
 
-
-# Bookmark Section
-def bookmark(request):
-    return render(request,"bookmark.html")
