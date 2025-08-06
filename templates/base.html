@@ -28,9 +28,6 @@
             <li class="nav-item {% block homeactive %}{% endblock homeactive %}">
               <a class="nav-link" aria-current="page" href="/home">Home</a>
             </li>
-            <li class="nav-item {% block exploreactive %}{% endblock exploreactive %}">
-              <a class="nav-link" href="/explore">Explore</a>
-            </li>
             <li class="nav-item {% block categoryactive %}{% endblock categoryactive %}">
               <a class="nav-link" href="/category">Category</a>
             </li>
@@ -102,7 +99,6 @@
         <ul style="list-style: none; padding: 0;">
           <li><a href="/home" style="color: #6C63FF;">Home</a></li>
           <li><a href="/category" style="color: #6C63FF;">Categories</a></li>
-          <li><a href="/explore" style="color: #6C63FF;">Explore</a></li>
           {% if user.is_authenticated %}
           <li><a href="/profile" style="color: #6C63FF;">Profile</a></li>
           {% else %}

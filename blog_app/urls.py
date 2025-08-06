@@ -4,9 +4,11 @@ from .views import *
 
 urlpatterns = [
     path('home/',HomeListView.as_view(),name="home"),
+    path('category/',CategoryView.as_view(),name="category"),
+
+
+    # function based view
     path('comment/',views.blogcomments,name="comment"),
-    path('explore/',views.explore,name="explore"),
-    path('category/',views.category,name="category"),
     path('create_blog/',views.createblog,name="createblog"),
     path('delete/<int:id>/',views.delete,name="delete"),
     path('dashboard/',views.dashboard,name="dashboard"),

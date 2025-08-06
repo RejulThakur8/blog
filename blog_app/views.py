@@ -23,15 +23,12 @@ class HomeListView(ListView):
         context["nav"] = Nav.objects.all()
         return context
 
-# Explore content section
-def explore(request):
-    return render(request,'explore.html')
-
 
 # Explore Content Using category section
-def category(request):
-    categories = Category.objects.all()
-    return render(request,'Category.html',{'categories':categories})
+class CategoryView(ListView):
+    model = Category
+    template_name = "Category.html"
+    context_object_name = "categories"
 
 
 # Create our blog section
