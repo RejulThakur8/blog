@@ -18,7 +18,7 @@ class AuthenticateAdmin(admin.ModelAdmin):
     list_display = ["username","email","password","phone_number"]
 
 class BlogAdmin(admin.ModelAdmin):
-    list_display = ["author","title","heading","Category","SubCategory","image"]
+    list_display = ["title","heading","Category","SubCategory","image"]
 
 class BlogCommentsAdmin(admin.ModelAdmin):
     list_display = ["user","blog"]

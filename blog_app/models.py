@@ -26,6 +26,8 @@ class Authenticate(models.Model):
 
     def __str__(self):
         return self.username
+    
+
 
 class Nav(models.Model):
     image = models.ImageField(upload_to="static/images", height_field=None, width_field=None, max_length=None)
