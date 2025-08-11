@@ -59,8 +59,8 @@ class Blog(models.Model):
     title = models.CharField(max_length=255,default="title")
     heading = models.CharField(max_length=255,default="author")
     new_slug = AutoSlugField(populate_from="heading",unique=True,null=True,default=None,max_length=255)
-    image = models.ImageField(upload_to="static/image")
-    image1 = models.ImageField(upload_to="static/image",blank=True,null=True)
+    image = models.ImageField(upload_to="static/images")
+    image1 = models.ImageField(upload_to="static/images",blank=True,null=True)
     author = models.CharField(max_length=255,default="heading")
     content = models.TextField()
     content1 = models.TextField()
@@ -87,5 +87,3 @@ class BlogComments(models.Model):
     def __str__(self):
         return  self.comment[0:10]
     
-class dash(models.Model):
-    pass

@@ -23,9 +23,9 @@
     </div>
 
     {% for i in nav %}
-    <div class="container position-relative mb-4">
-        <img src="{{i.image.url}}" class="img-fluid w-100" alt="...">
-        <div class="overlay-text position-absolute top-50 start-50 translate-middle text-center text-white">
+    <div class="container position-relative mb-4 mt-5">
+        <img src="{{i.image.url}}" class="img-fluid w-100" id="banner" alt="...">
+        <div class="overlay-text position-absolute top-50 start-50 translate-middle text-center text-white p-1">
             <h1 class="text-light fw-bold">{{i.title}}</h1>
             <p class="text-light">{{i.caption}}</p>
             <p class="text-light">{{i.para1}}</p>

@@ -38,3 +38,52 @@ margin-left: 10px;
     text-underline-offset: 10px;
     color: rgb(255, 51, 0);
 }
+
+
+#logo_img{
+    max-height: 100px;
+}
+/* Overlay text styling */
+.overlay-text {
+    max-width: 80%;
+    background: rgba(0, 0, 0, 0.4); /* Transparent black for readability */
+    border-radius: 10px;
+}
+
+/* Desktop view */
+.overlay-text h1 {
+    font-size: 2.5rem;
+}
+.overlay-text p {
+    font-size: 1.2rem;
+}
+
+/* Tablet view */
+@media (max-width: 992px) {
+    .overlay-text h1 {
+        font-size: 2rem;
+    }
+    .overlay-text p {
+        font-size: 1rem;
+        margin-bottom: 2px;
+    }
+}
+
+/* Mobile view */
+@media (max-width: 576px) {
+    .overlay-text {
+        padding: 15px;
+        max-width: 95%;
+    }
+    .overlay-text h1 {
+        font-size: 1.5rem;
+    }
+    .overlay-text p {
+        font-size: 0.9rem;
+        margin-bottom: 2px;
+    }
+    .overlay-text button {
+        font-size: 0.85rem;
+        padding: 6px 12px;
+    }
+}

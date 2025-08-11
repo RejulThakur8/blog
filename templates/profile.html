@@ -17,7 +17,7 @@
       <form class="row g-3" method="POST" action="{% url 'profile' %}" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="col-12">
-          {% if request.user.user_iamge %}
+          {% if request.user.user_image %}
           <img src="{{request.user.user_image.url}}" class="img-fluid image" alt="Unable to load image">
           {% else %}
           <img src="{{request.user.user_image.url}}" class="img-fluid image" alt="Unable to load image">

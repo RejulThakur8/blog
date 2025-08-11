@@ -12,77 +12,6 @@ import os
 from .forms import BlogForm
 # Create your views here.
 
-# Home Section
-class HomeListView(ListView):
-    model = Blog
-    template_name = "index.html"
-    context_object_name = "blog"
-
-    def get_context_data(self,**kwargs):
-        context = super().get_context_data(**kwargs)
-        context["nav"] = Nav.objects.all()
-        return context
-
-
-# Explore Content Using category section
-class CategoryView(ListView):
-    model = Category
-    template_name = "Category.html"
-    context_object_name = "categories"
-
-
-# Create our blog section
-def createblog(request):
-    if request.method=="POST":
-        form = BlogForm(request.POST,request.FILES)
-        if form.is_valid():
-            form.save()
-            messages.success(request,"Blog Created Succesfully!")
-            return redirect("/create_blog/")
-        messages.success(request,"Blog Created Succesfully!")
-    else:
-        form = BlogForm()
-        print(form.errors)
-    return render(request,'create_blog.html',{"form":form})
-
-@login_required
-def delete(request,id):
-    blog = get_object_or_404(Blog,id=id)
-    blog.delete()
-    messages.success(request,"Blog Deleted Successfully!")
-    return redirect("/create_blog/")
-
-
-# User's personalized dashboard
-def dashboard(request):
-    return render(request,'dashboard.html')
-
-
-# All blog pages
-def bloghome(request,slug):
-    more_blog = Blog.objects.all()[1:]
-    blog1 = Blog.objects.filter(new_slug=slug).first()
-    comments = BlogComments.objects.filter(blog=blog1)
-    return render(request,'bloghome.html',{"blog":blog1,"blog2":more_blog,"comments":comments})
-
-def blogcomments(request):
-    if request.method=="POST":
-        Comment = request.POST.get("comment")
-        user = request.user
-        blogid = request.POST.get("blogid")
-        blog = Blog.objects.get(id=blogid)
-
-        comments = BlogComments(comment=Comment,user=user,blog=blog)
-        comments.save()
-    return redirect(f"/bloghome/{blog.new_slug}")
-
-
-# This this search functionality
-def search(request):
-    query = request.GET["query"]
-    blog = Blog.objects.filter(Q(title__icontains=query) | Q(heading__icontains=query) | Q(content__icontains=query) | Q(content1__icontains=query) | Q(author__icontains=query) | Q(Category__category_name__icontains=query) | Q(SubCategory__sub_category_name__icontains=query))
-    
-    return render(request,"search.html",{"blog":blog,"query":query})
 
 # User Signup Section
 def signup(request):
@@ -137,6 +66,74 @@ def signin(request):
 def signout(request):
     logout(request)
     return redirect("/home")
+
+
+
+# Home Section
+class HomeListView(ListView):
+    model = Blog
+    template_name = "index.html"
+    context_object_name = "blog"
+
+    def get_context_data(self,**kwargs):
+        context = super().get_context_data(**kwargs)
+        context["nav"] = Nav.objects.all()
+        return context
+
+
+# Explore Content Using category section
+class CategoryView(ListView):
+    model = Category
+    template_name = "Category.html"
+    context_object_name = "categories"
+
+
+# Create our blog section
+def createblog(request):
+    if request.method=="POST":
+        form = BlogForm(request.POST,request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect("/create_blog/")
+        messages.success(request,"Blog Created Succesfully!")
+    else:
+        form = BlogForm()
+        print(form.errors)
+    return render(request,'create_blog.html',{"form":form})
+
+@login_required
+def delete(request,id):
+    blog = get_object_or_404(Blog,id=id)
+    blog.delete()
+    messages.success(request,"Blog Deleted Successfully!")
+    return redirect("/create_blog/")
+
+
+# All blog pages
+def bloghome(request,slug):
+    more_blog = Blog.objects.all()[1:]
+    blog1 = Blog.objects.filter(new_slug=slug).first()
+    comments = BlogComments.objects.filter(blog=blog1)
+    return render(request,'bloghome.html',{"blog":blog1,"blog2":more_blog,"comments":comments})
+
+def blogcomments(request):
+    if request.method=="POST":
+        Comment = request.POST.get("comment")
+        user = request.user
+        blogid = request.POST.get("blogid")
+        blog = Blog.objects.get(id=blogid)
+
+        comments = BlogComments(comment=Comment,user=user,blog=blog)
+        comments.save()
+    return redirect(f"/bloghome/{blog.new_slug}")
+
+
+# This this search functionality
+def search(request):
+    query = request.GET["query"]
+    blog = Blog.objects.filter(Q(title__icontains=query) | Q(heading__icontains=query) | Q(content__icontains=query) | Q(content1__icontains=query) | Q(author__icontains=query) | Q(Category__category_name__icontains=query) | Q(SubCategory__sub_category_name__icontains=query))
+    
+    return render(request,"search.html",{"blog":blog,"query":query})
 
 
 # User Profile Section
