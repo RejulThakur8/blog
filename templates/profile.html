@@ -16,14 +16,6 @@
   <div class="container bg-secondary profile-Update">
       <form class="row g-3" method="POST" action="{% url 'profile' %}" enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="col-12">
-          {% if request.user.user_image %}
-          <img src="{{request.user.user_image.url}}" class="img-fluid image" alt="Unable to load image">
-          {% else %}
-          <img src="{{request.user.user_image.url}}" class="img-fluid image" alt="Unable to load image">
-          {% endif %}
-          <input type="file" class="form-control" id="inputImage" value="{{request.user.user_image}}" name="user_image">
-        </div>
           <div class="col-md-4">
             <label for="inputEmail4" class="form-label">Email</label>
             <input type="email" class="form-control" id="inputEmail4" value="{{request.user.email}}" name="email">

@@ -1,0 +1,15 @@
+#categori{
+    background-color: black;
+}
+
+#categori ul li a{
+    color: white;
+}
+
+.dark #categori{
+    background-color: white;   
+}
+
+.dark #categori ul li a{
+    color: black;
+}

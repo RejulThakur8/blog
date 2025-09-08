@@ -7,7 +7,7 @@ from .models import *
 
 class CustomUserAdmin(UserAdmin):
     fieldsets = UserAdmin.fieldsets + (
-        (None, {'fields': ('phone_number','alter_phone_number','user_bio','user_image','user_address','user_city','user_state','user_country','user_zipcode'),
+        (None, {'fields': ('phone_number','alter_phone_number','user_bio','user_address','user_city','user_state','user_country','user_zipcode'),
                 }),
     )
 
@@ -29,4 +29,6 @@ admin.site.register(Authenticate,AuthenticateAdmin)
 admin.site.register(Blog,BlogAdmin)
 admin.site.register(Category)
 admin.site.register(SubCategory)
+admin.site.register(SubSubCategory)
 admin.site.register(BlogComments,BlogCommentsAdmin)
+admin.site.register(Logo)

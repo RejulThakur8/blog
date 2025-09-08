@@ -57,7 +57,7 @@ def signin(request):
         else:
             login(request,user)
             messages.success(request,"Successfully logged in!")
-            return redirect("/home/")
+            return redirect("/")
     else:
         return render(request,"signin.html")
 
@@ -67,7 +67,7 @@ def signin(request):
 @login_required(login_url="/signin/")
 def signout(request):
     logout(request)
-    return redirect("/home")
+    return redirect("/")
 
 
 
@@ -95,7 +95,9 @@ def createblog(request):
     if request.method=="POST":
         form = BlogForm(request.POST,request.FILES)
         if form.is_valid():
-            form.save()
+            blog = form.save(commit=False)
+            blog.author = request.user
+            blog.save()
             return redirect("/create_blog/")
         messages.success(request,"Blog Created Succesfully!")
     else:

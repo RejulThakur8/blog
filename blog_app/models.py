@@ -11,7 +11,6 @@ class CustomUser(AbstractUser):
     phone_number = models.CharField(max_length=100, unique=True)
     alter_phone_number = models.CharField(max_length=100)
     user_bio = models.CharField(max_length=100)
-    user_image = models.ImageField(upload_to="static/profile")
     user_address = models.TextField()
     user_city = models.CharField(max_length=50)
     user_state = models.CharField(max_length=50)
@@ -39,6 +38,12 @@ class Nav(models.Model):
 
     def __str__(self):
         return self.title
+
+class Logo(models.Model):
+    logo = models.ImageField(upload_to="static/images")
+
+    def __str__(self):
+        return self.logo
     
 
 class Category(models.Model):
@@ -51,23 +56,30 @@ class Category(models.Model):
 class SubCategory(models.Model):
     Category = models.ForeignKey(Category,related_name="catname",on_delete=models.CASCADE)
     sub_category_name = models.CharField(max_length=50)
-
     def __str__(self):
         return self.sub_category_name
     
+class SubSubCategory(models.Model):
+    SubCategory = models.ForeignKey(SubCategory,related_name="subsubcategory",on_delete=models.CASCADE)
+    name = models.CharField(max_length=100,default="subsubcat")
+
+    def __str__(self):
+        return self.name
+    
 class Blog(models.Model):
-    Category = models.ForeignKey(Category,related_name="cat_name",on_delete=models.CASCADE)
-    SubCategory = models.ForeignKey(SubCategory,related_name="sub_cat_name",on_delete=models.CASCADE)
+    Category = models.ForeignKey(Category,related_name="cat_name",on_delete=models.SET_NULL,null=True,blank=True)
+    SubCategory = models.ForeignKey(SubCategory,related_name="sub_cat_name",on_delete=models.SET_NULL,null=True,blank=True)
+    SubSubCategory = models.ForeignKey(SubSubCategory,related_name="subsub",on_delete=models.SET_NULL,null=True,blank=True)
     title = models.CharField(max_length=255,default="title")
     heading = models.CharField(max_length=255,default="author")
     new_slug = AutoSlugField(populate_from="heading",unique=True,null=True,default=None,max_length=255)
     image = models.ImageField(upload_to="static/images")
     image1 = models.ImageField(upload_to="static/images",blank=True,null=True)
-    author = models.CharField(max_length=255,default="heading")
+    author = models.ForeignKey(CustomUser,on_delete=models.SET_NULL,max_length=255,null=True)
     content = models.TextField()
     content1 = models.TextField()
     iframe = models.URLField(blank=True,null=True,max_length=200)
-    datetime = models.DateTimeField(auto_now_add=True)    
+    datetime = models.DateTimeField(auto_now_add=True)
 
     def total_like(self):
         return self.like.count()
@@ -76,7 +88,7 @@ class Blog(models.Model):
         return self.comment.count()
     
     def __str__(self):
-        return self.author
+        return self.title
     
 
 class BlogComments(models.Model):
