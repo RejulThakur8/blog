@@ -1,9 +1,9 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponse, HttpResponseNotAllowed
 from .models import CustomUser
-from django.views.generic import ListView
+from django.views.generic import ListView,DeleteView,UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import hashers
@@ -84,12 +84,48 @@ class HomeListView(ListView):
 
 
 # Explore Content Using category section
-class CategoryView(ListView):
-    model = Category
+class CategoryBlogView(ListView):
+    model = Blog
     template_name = "Category.html"
-    context_object_name = "categories"
+    context_object_name = "blogs"
 
+    def get_queryset(self):
+        category_id = self.kwargs.get('pk')
+        if category_id:
+            return Blog.objects.filter(category_id=category_id)
+        return Blog.objects.all()
+    
+    def get_context_data(self,**kwargs):
+        context = super().get_context_data(**kwargs)
+        context['category'] = Category.objects.all()
+        if 'pk' in self.kwargs:
+            context["active_category"] = Category.objects.get(pk=self.kwargs['pk'])
+        else:
+            context["active_category"] = None
+        return context
 
+# dashboard page
+class DashboardView(ListView):
+    model = Blog
+    template_name = "dashboard.html"
+    context_object_name = "blog"
+    
+    def get_queryset(self):
+        return Blog.objects.filter(author=self.request.user)
+    
+
+# delete comment
+class DeletecommentView(DeleteView):
+    model = BlogComments
+    template_name = "delete.html"
+
+    def get_queryset(self):
+        return BlogComments.objects.filter(user=self.request.user)
+    
+    def get_success_url(self):
+        return reverse_lazy("blog-detail", kwargs={"slug":self.object.blog.new_slug})
+        
+    
 # Create our blog section
 def createblog(request):
     if request.method=="POST":
@@ -105,12 +141,12 @@ def createblog(request):
         print(form.errors)
     return render(request,'create_blog.html',{"form":form})
 
-@login_required
-def delete(request,id):
-    blog = get_object_or_404(Blog,id=id)
-    blog.delete()
-    messages.success(request,"Blog Deleted Successfully!")
-    return redirect("/create_blog/")
+# @login_required
+# def delete(request,id):
+#     blog = get_object_or_404(Blog,id=id)
+#     blog.delete()
+#     messages.success(request,"Blog Deleted Successfully!")
+#     return redirect("/create_blog/")
 
 
 # All blog pages
@@ -135,7 +171,7 @@ def blogcomments(request):
 # This this search functionality
 def search(request):
     query = request.GET["query"]
-    blog = Blog.objects.filter(Q(title__icontains=query) | Q(heading__icontains=query) | Q(content__icontains=query) | Q(content1__icontains=query) | Q(author__icontains=query) | Q(Category__category_name__icontains=query) | Q(SubCategory__sub_category_name__icontains=query))
+    blog = Blog.objects.filter(Q(title__icontains=query) | Q(heading__icontains=query) | Q(content__icontains=query) | Q(content1__icontains=query) | Q(author__username__icontains=query) | Q(category__category_name__icontains=query) | Q(subcategory__sub_category_name__icontains=query))
     
     return render(request,"search.html",{"blog":blog,"query":query})
 

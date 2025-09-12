@@ -67,9 +67,9 @@ class SubSubCategory(models.Model):
         return self.name
     
 class Blog(models.Model):
-    Category = models.ForeignKey(Category,related_name="cat_name",on_delete=models.SET_NULL,null=True,blank=True)
-    SubCategory = models.ForeignKey(SubCategory,related_name="sub_cat_name",on_delete=models.SET_NULL,null=True,blank=True)
-    SubSubCategory = models.ForeignKey(SubSubCategory,related_name="subsub",on_delete=models.SET_NULL,null=True,blank=True)
+    category = models.ForeignKey(Category,related_name="cat_name",on_delete=models.SET_NULL,null=True,blank=True)
+    subcategory = models.ForeignKey(SubCategory,related_name="sub_cat_name",on_delete=models.SET_NULL,null=True,blank=True)
+    subsubcategory = models.ForeignKey(SubSubCategory,related_name="subsub",on_delete=models.SET_NULL,null=True,blank=True)
     title = models.CharField(max_length=255,default="title")
     heading = models.CharField(max_length=255,default="author")
     new_slug = AutoSlugField(populate_from="heading",unique=True,null=True,default=None,max_length=255)
@@ -95,7 +95,6 @@ class BlogComments(models.Model):
     comment = models.TextField()
     user = models.ForeignKey(CustomUser,on_delete=models.CASCADE)
     blog = models.ForeignKey(Blog,on_delete=models.CASCADE)
-    parent = models.ForeignKey('self',on_delete=models.CASCADE,null=True)
     time = models.DateTimeField(default=now)
 
     def __str__(self):

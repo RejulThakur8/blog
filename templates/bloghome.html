@@ -8,7 +8,7 @@
 <div class="container">
     <section class="row">
         <div class="col-lg-7 col-md-12">
-            <h1><a class="text-decoration-none" href="">{{blog.Category}}</a> > {{blog.SubCategory}} > {{blog.title}}
+            <h1><a class="text-decoration-none" href="">{{blog.category}}</a> > {{blog.subcategory}}  > {{blog.subsubcategory}} > {{blog.title}}
             </h1>
             <h6> {{blog.datetime}}</h6>
             <h6> <span class="text-secondary"> Story by -</span> <a href="">{{blog.author}}</a> </h>
@@ -50,7 +50,7 @@
                 </form>
             </div>
 
-            <!-- Comments -->
+            <!-- Comment Section-->
             <div class="container mt-5 m-0 p-0">
                 <h1 class="text-secondary">Comments :</h1>
                 <div class="col-12">
@@ -62,7 +62,9 @@
                             <div class="col-12 d-flex justify-content-start gap-2">
                                 <button name="" id="" class="btn btn-link text-decoration-none" type="button" role="button">Reply</button>
                                 <button class="btn btn-secondary" type="submit">Edit</button>
-                                <a href="/delete/{{i.id}}" class="btn btn-danger" type="submit">Delete</a>
+                                {% if i.user == request.user %}
+                                <a href="{% url 'delete-comment' i.id %}" class="btn btn-danger" type="submit">Delete</a>
+                                {% endif %}
                             </div>
                         </div>
                     {% endfor %}

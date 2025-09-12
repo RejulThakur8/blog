@@ -1,18 +1,30 @@
-{% extends "base.html" %}
-
-{% block title %} My Blog {% endblock title %}
-{% block dashboardactive %} active {% endblock dashboardactive %}
-
-{% load static %}
-
+{% extends "base.html" %} {% block title %} My Blog {% endblock title %}
+{% block dashboardactive %} active {% endblock dashboardactive %} {% load static %}
 {% block start %}
 
 <div class="container bg-secondary text-white text-center py-5">
     <h1>This is Dashboard Page</h1>
-    <p>Welcome to the dashboard! Here you can manage your blog post and view staticstics.</p>
-    
-    
-</div>
+    <p>
+        Welcome to the dashboard! Here you can manage your blog post and view
+        staticstics.
+    </p>
+    {% if blog %}
+    {% for i in blog %}
+    <div class="card bg-dark" style="width: 18rem">
+        <img src="{{i.image.url}}" class="card-img-top" alt="..." />
+        <div class="card-body">
+            <h5 class="card-title text-white">{{i.title}}</h5>
+            <p class="card-text text-white">{{i.heading}}</p>
+            <p class="card-text text-white mb-auto">{{i.content | truncatechars:150}}</p>
+            <a href="/bloghome/{{i.new_slug}}" class="icon-link gap-1 icon-link-hover stretched-link">Continue reading</a>
+        </div>
+    </div>
+    {% endfor %}
 
+    {% else %}
+    <p class="mx-5 bg-danger text-white">No blogs created yet.</p>
+
+    {% endif %}
+</div>
 
 {% endblock %}
