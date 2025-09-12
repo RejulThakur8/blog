@@ -6,6 +6,18 @@
 
 
 <div class="container">
+    <div class="messages d-flex justify-content-center text-center">
+        {% if messages %}
+
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} w-50 alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+
+        {% endif %}
+    </div>
     <section class="row">
         <div class="col-lg-7 col-md-12">
             <h1><a class="text-decoration-none" href="">{{blog.category}}</a> > {{blog.subcategory}}  > {{blog.subsubcategory}} > {{blog.title}}
@@ -63,7 +75,10 @@
                                 <button name="" id="" class="btn btn-link text-decoration-none" type="button" role="button">Reply</button>
                                 <button class="btn btn-secondary" type="submit">Edit</button>
                                 {% if i.user == request.user %}
-                                <a href="{% url 'delete-comment' i.id %}" class="btn btn-danger" type="submit">Delete</a>
+                                <form action = "{% url 'delete-comment' i.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button class="btn btn-danger" type="submit">Delete</button>
+                                </form>
                                 {% endif %}
                             </div>
                         </div>

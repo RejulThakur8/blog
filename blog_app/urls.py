@@ -7,12 +7,11 @@ urlpatterns = [
     path('category/',CategoryBlogView.as_view(),name="category"),
     path('category/<int:pk>/',CategoryBlogView.as_view(),name="category-blog"),
     path('dashboard/',DashboardView.as_view(),name="dashboard"),
-    path('delete-comment<int:pk>/',DeletecommentView.as_view(),name="delete-comment"),
+    path('comment/delete/<int:pk>/',CommentDeleteView.as_view(),name="delete-comment"),
 
     # function based view
     path('comment/',views.blogcomments,name="comment"),
     path('create_blog/',views.createblog,name="createblog"),
-    # path('delete/<int:id>/',views.delete,name="delete"),
     path('signup/',views.signup,name="signup"),
     path('signin/',views.signin,name="signin"),
     path('logout/',views.signout,name="logout"),

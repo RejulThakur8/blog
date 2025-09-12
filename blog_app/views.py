@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseNotAllowed
 from .models import CustomUser
 from django.views.generic import ListView,DeleteView,UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views import View
 from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -112,18 +113,7 @@ class DashboardView(ListView):
     
     def get_queryset(self):
         return Blog.objects.filter(author=self.request.user)
-    
 
-# delete comment
-class DeletecommentView(DeleteView):
-    model = BlogComments
-    template_name = "delete.html"
-
-    def get_queryset(self):
-        return BlogComments.objects.filter(user=self.request.user)
-    
-    def get_success_url(self):
-        return reverse_lazy("blog-detail", kwargs={"slug":self.object.blog.new_slug})
         
     
 # Create our blog section
@@ -141,12 +131,17 @@ def createblog(request):
         print(form.errors)
     return render(request,'create_blog.html',{"form":form})
 
-# @login_required
-# def delete(request,id):
-#     blog = get_object_or_404(Blog,id=id)
-#     blog.delete()
-#     messages.success(request,"Blog Deleted Successfully!")
-#     return redirect("/create_blog/")
+
+class CommentDeleteView(LoginRequiredMixin, View):
+    def post(self,request,pk):
+        comment = get_object_or_404(BlogComments,pk=pk)
+
+        if comment.user == self.request.user:
+            blog_slug = comment.blog.new_slug
+            comment.delete()
+            messages.success(request,"Comment Deleted Successfully!")
+            return redirect(f"/bloghome/{blog_slug}")
+        return redirect(f"/bloghome/{comment.blog.new_slug}")
 
 
 # All blog pages
